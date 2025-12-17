@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .randome {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .randome .color {
+            border: 1px solid #0000;
+            border-radius: 5px;
+            box-shadow: 5px 10px #7c7c7c;
+            height: 500px;
+            width: 500px;
+
+        }
+
+        button {
+            display: flex;
+            margin: 20px auto;
+            text-align: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="randome">
+        <div class="color" id="color">
+
+        </div>
+
+    </div>
+    <button type="button" id="btncol">Change Color</button>
+
+
+    <script>
+        let btn = document.getElementById("btncol");
+
+        btn.addEventListener("click", () => {
+            let color = "#" + Math.floor(Math.random() * 16777216).toString(16);
+            document.getElementById("color").style.backgroundColor = color;
+        })
+    </script>
+</body>
+
+</html>

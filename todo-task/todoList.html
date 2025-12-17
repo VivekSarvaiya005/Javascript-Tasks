@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .errMsg {
+            color: red;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="todo" id="todo">
+        <div class="input" id="input">
+            <input type="text" name="" id="todoitem">
+            <button type="button" id="add">Add</button>
+            <button type="button" onclick="clearList()">Clear</button>
+        </div>
+        <div class="errMsg" id="err"></div>
+        <ol class="todoList" id="todoList"></ol>
+    </div>
+
+    <script>
+
+        let btnAdd = document.getElementById('add');
+        let btnClear = document.getElementById('add');
+        let errRef = document.getElementById('err');
+        let num = 0;
+
+
+        function createTodo(listid, taskvalue) {
+
+            let list = document.createElement('li');
+            list.id = "list";
+
+            let label = document.createElement('label');
+            label.htmlFor = listid;
+            label.textContent = taskvalue;
+
+            let inputCheck = document.createElement('input');
+            inputCheck.type = "checkbox";
+            inputCheck.id = listid;
+
+
+            list.appendChild(inputCheck);
+            list.appendChild(label);
+
+            document.getElementById('todoList').appendChild(list);
+            console.log(list);
+
+        }
+
+        function clearList() {
+            document.getElementById('todoList').innerHTML = '';
+        }
+
+        btnAdd.addEventListener("click", () => {
+            let taskvalue = document.getElementById('todoitem').value;
+            console.log(taskvalue);
+
+            errRef.innerText = '';
+            let listid = 'task' + ++num;
+
+            createTodo(listid, taskvalue);
+
+            document.getElementById('todoitem').value = "";
+
+        })
+
+    </script>
+</body>
+
+</html>

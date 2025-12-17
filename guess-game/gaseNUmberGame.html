@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="game">
+        <p>Play Number gase game :- </p>
+        <button type="button" onclick="startGame()">Start</button>
+    </div>
+    <script>
+        function startGame() {
+            let randomeNumber = Math.floor(Math.random() * 100);
+            let num = 0;
+            console.log(randomeNumber);
+            let userInput = 0;
+            while (userInput != randomeNumber) {
+                userInput = prompt('Gase any Numer 1 to 100');
+                num++;
+            }
+
+            alert(`congratulation you gase ${userInput} and game Number  ${randomeNumber} both are same !You Won your  try = ${num}`);
+
+        }
+    </script>
+</body>
+
+</html>

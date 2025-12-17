@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Misho Style Image Upload</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #f4f6f8;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .upload-box {
+      width: 250px;
+      height: 200px;
+      border: 2px dashed #c2cdda;
+      border-radius: 10px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 40px;
+      color: #4c6fff;
+      position: relative;
+    }
+
+    .upload-box:hover {
+      border-color: #4c6fff;
+      background: #f0f4ff;
+    }
+
+    .upload-box span {
+      position: absolute;
+      bottom: 15px;
+      color: #888;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .preview {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .preview img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+
+<body>
+
+  <label for="fileUpload" class="upload-box" id="dropZone">
+    <div>+</div>
+    <span>Click or drag image here</span>
+  </label>
+  <input type="file" id="fileUpload" accept="image/*" multiple>
+
+  <div class="preview" id="preview"></div>
+
+  <script>
+    const fileInput = document.getElementById("fileUpload");
+    const preview = document.getElementById("preview");
+    const dropZone = document.getElementById("dropZone");
+
+    dropZone.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      dropZone.style.borderColor = "#4c6fff";
+      dropZone.style.background = "#f0f4ff";
+    });
+
+    dropZone.addEventListener("dragleave", () => {
+      dropZone.style.borderColor = "#c2cdda";
+      dropZone.style.background = "#fff";
+    });
+
+    dropZone.addEventListener("drop", (e) => {
+      e.preventDefault();
+      fileInput.files = e.dataTransfer.files;
+      displayImages();
+    });
+
+    fileInput.addEventListener("change", displayImages);
+
+    function displayImages() {
+      preview.innerHTML = "";
+      for (const file of fileInput.files) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = document.createElement("img");
+          img.src = e.target.result;
+          preview.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  </script>
+
+</body>
+
+</html>

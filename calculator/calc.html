@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        .fullcal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #eff5fb;
+
+        }
+
+        button {
+            width: calc(25% - 2px);
+            height: 50px;
+            margin: 2px;
+            font-size: 1.3rem;
+            border-radius: 10px;
+        }
+
+        input[type='text'] {
+            height: 70px;
+            width: 100%;
+            text-align: end;
+            font-size: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .d-flex {
+            display: flex;
+            justify-content: end;
+        }
+
+        .btnOpr {
+            background-color: #ddf8ff;
+        }
+
+        .btnPrimary {
+            background-color: rgb(108, 186, 242);
+        }
+
+        .btnDanger {
+            background-color: #ff9898;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="fullcal">
+        <div class="container">
+            <div class="calc">
+                <input type="text" name="" id="result" readonly>
+            </div>
+
+            <div class="number" id="number">
+                <div class="d-flex">
+                    <button type="button" class="btnOpr">%</button>
+                    <button type="button" class="btnOpr">/</button>
+                    <button type="button" class="btnDanger">←</button>
+                    <button type="button" class="btnDanger">ʗ</button>
+
+                </div>
+
+                <div class="d-flex">
+                    <button type="button">7</button>
+                    <button type="button">8</button>
+                    <button type="button">9</button>
+                    <button type="button" class="btnOpr">*</button>
+                </div>
+
+                <div class="d-flex">
+                    <button type="button">4</button>
+                    <button type="button">5</button>
+                    <button type="button">6</button>
+                    <button type="button" class="btnOpr">-</button>
+                </div>
+
+
+                <div class="d-flex">
+                    <button type="button">1</button>
+                    <button type="button">2</button>
+                    <button type="button">3</button>
+                    <button type="button" class="btnOpr">+</button>
+                </div>
+
+                <div class="d-flex">
+                    <button type="button">ʗ</button>
+                    <button type="button">0</button>
+                    <button type="button">.</button>
+                    <button type="button" class="btnPrimary">=</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        let result = document.getElementById("result");
+        let button = document.querySelectorAll("button");
+
+        button.forEach((btn) => {
+            btn.addEventListener("click", () => {
+
+                let calculate = (value) => {
+                    if (value === "=") {
+                        result.value = Function('return ' + result.value)();
+                    }
+                    else if (value === 'ʗ') {
+                        result.value = '';
+                    }
+                    else if (value === '←') {
+                        result.value = result.value.slice(0, -1)
+                    }
+                    else {
+                        result.value += btn.textContent;
+                    }
+                }
+                calculate(btn.textContent);
+            })
+        })
+    </script>
+</body>
+
+</html>

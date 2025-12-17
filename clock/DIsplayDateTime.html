@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .display {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            background: linear-gradient(90deg, rgb(50, 77, 73) 0%, rgb(98, 197, 132) 57%, rgb(31, 121, 79) 100%);
+            color: transparent;
+            background-clip: text;
+
+        }
+
+        h2 {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="display">
+        <h1 class="massage" id="massage">Good Morning</h1>
+        <h2 class="date" id="date">01/01/01</h2>
+        <h2 class="time" id="time"> 00:00:00</h2>
+    </div>
+
+    <script>
+
+        setInterval(() => {
+            let date = new Date();
+
+            let displayTime = date.toLocaleTimeString('en-IN', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            });
+
+            let displayDate = date.toLocaleDateString('en-IN', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            })
+
+            if (date.getHours() >= 5 && date.getHours() < 12) {
+                document.getElementById('massage').innerText = 'Good Morning';
+            }
+            else if (date.getHours() >= 12 && date.getHours() < 17) {
+                document.getElementById('massage').innerText = 'Good Afternoon';
+            } else if (date.getHours() >= 17 && date.getHours() < 21) {
+                document.getElementById('massage').innerText = 'Good Evning';
+            } else if (date.getHours() >= 21 && date.getHours() < 5) {
+                document.getElementById('massage').innerText = 'Good Night';
+            }
+
+            document.getElementById("time").innerText = displayTime;
+            document.getElementById("date").innerText = displayDate;
+
+        })
+    </script>
+</body>
+
+</html>

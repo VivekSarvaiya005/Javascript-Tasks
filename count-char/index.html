@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .text {
+        display: flex;
+        justify-content: center;
+        align-items: end;
+        flex-direction: column;
+        height: 100vh;
+        width: 300px;
+        margin: 0 auto;
+
+    }
+
+    textarea {
+        width: 100%;
+        resize: none;
+    }
+</style>
+
+<body>
+
+    <div class="text">
+        <textarea name="" id="textarea" rows="10" max="10"></textarea>
+        <span class="length" id="langth"></span>
+    </div>
+
+
+    <script>
+        let text = document.getElementById("textarea");
+
+        text.addEventListener("input", () => {
+
+            let textLangth = text.value.length;
+            let maxLangth = text.maxLength = 150;
+
+            if (textLangth >= maxLangth) {
+                document.getElementById('langth').style.color = 'red';
+            }
+            document.getElementById('langth').textContent = `${textLangth} / ${maxLangth}`;
+        })
+    </script>
+</body>
+
+</html>
