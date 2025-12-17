@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form action="">
+        <div class="name" id="name">
+
+        </div>
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            let singleInp = ` <input type="text" name="" id="fullName" placeholder="Full Name">`;
+
+            let dubbleInp = `<input type="text" name="" id="fristName" placeholder="Frist Name">
+            <input type="text" name="" id="lastName" placeholder="Last Name">`;
+
+            function showNameInput() {
+                let windoeSize = $(window).width();
+
+
+                if (windoeSize < 768) {
+                    let fname = $('#fristName').val() || '';
+                    let lname = $('#lastName').val() || '';
+
+                    let checkExist = $('#fullName').length;
+                    if (checkExist == 0) {
+                        $('#name').html(singleInp);
+                        $('#fullName').val(`${fname} ${lname}`.trim());
+                    }
+                }
+                else {
+                    let fullName = $("#fullName").val() || '';
+                    let step = fullName.split(' ');
+                    let checkExist = $('#fristName , #lastName').length;
+                    if (checkExist == 0) {
+                        $('#name').html(dubbleInp);
+                        $('#fristName').val(`${step[0]}`);
+                        $('#lastName').val(step.slice(1).join(' '));
+                    }
+                }
+
+            }
+            showNameInput();
+            $(window).resize(showNameInput);
+        })
+    </script>
+</body>
+
+</html>

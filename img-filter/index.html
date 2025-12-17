@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <section class="hero">
+            <h1 class="text-center">JQuery Image Filter Gallery</h1>
+
+            <div class="d-flex justify-content-center m-4">
+                <button type="button" class="btn btn-secondary " id="btnAllImg">All</button>
+                <button type="button" class="btn btn-primary mx-3" id="btnNatureImg">Nature</button>
+                <button type="button" class="btn btn-success" id="btnAnimalImg">Animal</button>
+            </div>
+
+            <div class="row">
+                <div class="col-4">
+                    <input type="url" name="image" id="imgUrl" class="form-control">
+                </div>
+                <div class="col-4">
+                    <select name="" id="imgType" class="form-select">
+                        <option value="Nature">Nature</option>
+                        <option value="Animal">Animal</option>
+                    </select>
+                </div>
+                <div class="col-4">
+                    <button type="button" class="btn btn-warning w-100" id="addImg">Add Image</button>
+                </div>
+                <span id="errMsg" class=" text-danger"></span>
+            </div>
+
+            <div class="displayImages m-4">
+                <div class="images d-flex  flex-wrap " id="showImg">
+                    
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(document).ready(function () {
+            let imgdata = JSON.parse(localStorage.getItem('imgData')) || [];
+
+            $('#addImg').click(function () {
+
+                let imgUrl = $('#imgUrl');
+                let imgType = $('#imgType');
+
+                console.log(imgUrl, imgType);
+
+
+                if (!imgUrl.val() && imgUrl.val() == '') {
+                    $('#errMsg').text('Please Enter Url');
+                } else {
+                    $('#errMsg').empty();
+                    let obj = {
+                        imgUrl: imgUrl.val(),
+                        imgType: imgType.val()
+                    }
+                    console.log(obj);
+
+
+                    imgdata.push(obj);
+                    localStorage.setItem('imgData', JSON.stringify(imgdata))
+                }
+                shoeData();
+            });
+
+            function shoeData() {
+                let res = '';
+
+                imgdata.map((val) => {
+                    res += `
+            <div class="col-3">
+            <img src="${val.imgUrl}" alt="images">
+                     <p>${val.imgType}</p>
+                     </div>`;
+                });
+
+                $('#showImg').html(res);
+
+            }
+
+            $('#btnAllImg').click(function () {
+                shoeData();
+            })
+
+            $('#btnAnimalImg').click(function () {
+                let res = '';
+
+                imgdata.filter((val) => {
+                    if (val.imgType == 'Animal') {
+                        res += ` <div class="col-3">
+                            <img src="${val.imgUrl}" alt="images">
+                     <p>${val.imgType}</p>
+                     </div>`;
+                    }
+                });
+
+                $('#showImg').html(res);
+            })
+
+            $('#btnNatureImg').click(function () {
+                let res = '';
+
+                imgdata.filter((val) => {
+                    if (val.imgType == 'Nature') {
+                        res += ` <div class="col-3">
+                            <img src="${val.imgUrl}" alt="images">
+                     <p>${val.imgType}</p>
+                     </div>  `;
+                    }
+                });
+
+                $('#showImg').html(res);
+            })
+
+            shoeData();
+
+        });
+    </script>
+</body>
+
+</html>
